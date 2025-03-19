@@ -8,5 +8,13 @@ def root():
 
 @app.route("/vastaus")
 def vastaus():
-    return render_template('vastaus.html', nimi=request.args['nimi'])
+    salaus=request.args['salauksen_muokkaus']
+    salattu=request.args['nimi']
+    for i in range(1,len(salaus),2):
+        salattu = salattu.replace(salaus[i],salaus[i-1])
+        
+    return render_template('vastaus.html', nimi=request.args['nimi'], tulos=salattu)
+    
 
+if __name__ == '__main__':
+    app.run()
